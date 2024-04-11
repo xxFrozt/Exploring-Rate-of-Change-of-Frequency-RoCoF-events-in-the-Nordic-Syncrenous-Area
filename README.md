@@ -1,8 +1,10 @@
 # DISCLAIMER: There have been raised FutureWarnings when running the code. This could possibly affect the future usability of the code. Maintenence will not be provided.
 ## Table of Contents
+#Title - Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area
+
 
 - [Sections](#sections)
-  - [Title](#Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area)
+  - [Title](#Title)
   - [Banner](#banner)
   - [Badges](#badges)
   - [Short Description](This repository contains code to analyze and process frequency data from FinGrid. Where the main goal is to identify Rate of Change of Frequency events in the Nordic Syncreneous Area. This is a part of my Master Thesis work at NMBU.)
@@ -18,4 +20,4 @@
   - [Thanks](#thanks)
   - [Contributing](#contributing)
   - [License](#license)
-- [Definitions](#definitions)
+- [Definitions](RoCoF - Stands for Rate of Change of Frequency. It measures how quickly the frequency of an alternating current (AC) power system is changing over time.)
