@@ -19,4 +19,3 @@
 - [Definitions](RoCoF - Stands for Rate of Change of Frequency. It measures how quickly the frequency of an alternating current (AC) power system is changing over time.)
 
 # DISCLAIMER: There have been raised FutureWarnings when running the code. This could affect the future usability of the code. Maintenence will not be provided.
-## Table of Contents
