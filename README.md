@@ -1,8 +1,5 @@
 ## Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area
 
-#Title - Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area
-
-
 - [Sections](#sections)
   - [Title](#Title)
   - [Banner](#banner)
