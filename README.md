@@ -1,22 +1,5 @@
-# 
-#
-# 
-#
-# 
-#
-#
-#
-#
-#
-#
-#
-# DISCLAIMER: There have been raised FutureWarnings when running the code. This could possibly affect the future usability of the code.
-#
-
-
+# DISCLAIMER: There have been raised FutureWarnings when running the code. This could possibly affect the future usability of the code. Maintenence will not be provided.
 ## Table of Contents
-
-_Note: This is only a navigation guide for the specification, and does not define or mandate terms for any specification-compliant documents._
 
 - [Sections](#sections)
   - [Title](#Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area)
