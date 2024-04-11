@@ -1,5 +1,5 @@
-# DISCLAIMER: There have been raised FutureWarnings when running the code. This could possibly affect the future usability of the code. Maintenence will not be provided.
-## Table of Contents
+# Title - Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area
+
 #Title - Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area
 
 
@@ -15,9 +15,11 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Extra Sections](#extra-sections)
-  - [API](#api)
-  - [Maintainers](#maintainers)
+  - [Maintainers](Not provided)
   - [Thanks](#thanks)
   - [Contributing](#contributing)
   - [License](#license)
 - [Definitions](RoCoF - Stands for Rate of Change of Frequency. It measures how quickly the frequency of an alternating current (AC) power system is changing over time.)
+
+# DISCLAIMER: There have been raised FutureWarnings when running the code. This could affect the future usability of the code. Maintenence will not be provided.
+## Table of Contents
