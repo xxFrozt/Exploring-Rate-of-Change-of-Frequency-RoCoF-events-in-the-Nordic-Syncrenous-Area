@@ -21,7 +21,7 @@ from matplotlib.ticker import MaxNLocator
 years= [str(year) for year in range(2015,2024)]
 
 # Reading all files from a given folder
-base_folder_path = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/'#+ year + '/'  # Replace with the actual folder path
+base_folder_path = r'your_folder'#+ year + '/'  # Replace with the actual folder path
 file_prefix = 'rocofevents_'
 
 def create_scatter_max_RoCoF_vs_Nadir(df, folder_path,ax):
@@ -155,7 +155,7 @@ for i, year in enumerate(years):
     # Combine all dataframes in dfs into one dataframe
     combined_df = pd.concat(dfs)
 
-    # Create a new column to indicate if the RoCoF is positive or negative
+    # Create a new column to indicate if the initial RoCoF is positive or negative
     combined_df['rocof_sign'] = np.where(combined_df['rocof'] >= 0, 'positive', 'negative')
 
     # Save the combined dataframe as a new csv file
@@ -188,7 +188,7 @@ all_years_df = pd.concat(all_dfs)
 fig.subplots_adjust(left=.075, bottom=.15, right=.99, top=.90,
                     hspace=.1, wspace=.5)
 create_scatter_max_RoCoF_vs_Nadir_2015_2023(all_years_df, ax_big) # Call your function to create the main plot. Using the combined dataframe of all years. Do not put this in the loop above.
-#ax_big.set_title(r'Max RoCoF vs Nadir 2015 - 2023')
+
 # Reduce whitespace around the figure
 plt.tight_layout()
 plt.savefig(f'{os.path.dirname(base_folder_path)}/max_rocof_vs_nadir{year}.pdf') 
