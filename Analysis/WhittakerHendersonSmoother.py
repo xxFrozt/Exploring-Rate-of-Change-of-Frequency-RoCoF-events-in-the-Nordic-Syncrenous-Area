@@ -1,4 +1,4 @@
-# WhittakerHendersonSmootherMAX_ORDER
+# WhittakerHendersonSmoother. Adapted from Java code found in the supporting information in 'Why and How Savitzky–Golay Filters Should Be Replaced', https://doi.org/10.1021/acsmeasuresciau.1c00054
 
 
 import numpy as np
@@ -14,7 +14,7 @@ class WhittakerHendersonSmoother:
     ]
     LAMBDA_FOR_NOISE_GAIN = [0.06284, 0.0050100, 0.0004660, 4.520e-05, 4.467e-06] #trying bigger values
 
-    def __init__(self, length, order, lambda_val):           # provide length of Numpy array, and order(penalty) and lambda(smoothing)
+    def __init__(self, length, order, lambda_val):           # provide length of Numpy array, and the parameters order(penalty) and lambda(smoothing strength)
         self.matrix = self.make_dprime_d(order, length)
         self.times_lambda_plus_ident(self.matrix, lambda_val)
         self.cholesky_l(self.matrix)
@@ -60,8 +60,7 @@ class WhittakerHendersonSmoother:
             g_power *= noise_gain                                                             # multiply g power by noise gain
         lambda_val = WhittakerHendersonSmoother.LAMBDA_FOR_NOISE_GAIN[order] / (g_power + g_power) # lambda is calculated from g power
         return lambda_val
-#The np.arange function is used to create an array of indices, and then these indices are used to select elements from the coeffs array. The np.sum function is used to calculate the sum of the products. This should be faster than the original version, especially for large arrays.
-# new method below
+
     @staticmethod
     def make_dprime_d(order, size):
         if order < 1 or order > WhittakerHendersonSmoother.MAX_ORDER:
@@ -78,27 +77,6 @@ class WhittakerHendersonSmoother:
                 out[d][i] = s
                 out[d][len(out[d]) - 1 - i] = s
         return out
-
-
-
-#old working method below        
-#    @staticmethod
-#    def make_dprime_d(order, size):
-#        if order < 1 or order > WhittakerHendersonSmoother.MAX_ORDER:                          # check if order is within the range
-#            raise ValueError(f"Invalid order {order}") 
-#        if size < order:
-#            raise ValueError(f"Order ({order}) must be less than number of points ({size})")
-
-#        coeffs = WhittakerHendersonSmoother.DIFF_COEFF[order - 1]                             # get the coefficients for the order
-#        out = [np.zeros(size - d) for d in range(order + 1)]                                  # create an empty list
-#        for d in range(order + 1):                                                            # loop through the order
-#            for i in range((len(out[d]) + 1) // 2):                                           # loop through the length of the list
-#                s = sum(coeffs[j] * coeffs[j + d] for j in range(max(0, i - len(out[d]) + len(coeffs) - d),  
-#                                                                  min(i + 1, len(coeffs) - d)))# sum the coefficients
-#                out[d][i] = s                                                                  # assign the sum to the list
-#                out[d][len(out[d]) - 1 - i] = s                                                # assign the sum to the list
-#        return out
-
 
     @staticmethod
     def times_lambda_plus_ident(b, lambda_val):
@@ -123,8 +101,6 @@ class WhittakerHendersonSmoother:
                     b[0][i] = np.sqrt(sqrt_arg)                                              # calculate the square root
                 else:
                     b[i - j][j] = 1.0 / b[0][j] * (b[i - j][j] - s)                          # calculate the off-diagonal elements
-
-
 
     @staticmethod
     def solve(b, vec, out=None):
