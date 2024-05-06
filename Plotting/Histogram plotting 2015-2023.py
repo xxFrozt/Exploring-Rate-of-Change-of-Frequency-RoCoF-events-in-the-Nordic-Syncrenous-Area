@@ -1,11 +1,9 @@
 ### 2015-2023 plotting histograms for 2015-2023. Subplots for each year.
 
-
-
 import pandas as pd
 import seaborn as sns
 import matplotlib
-matplotlib.rcParams['pgf.texsystem'] = 'pdflatex'
+matplotlib.rcParams['pgf.texsystem'] = 'pdflatex'                      #Making figure prettier for latex usage.
 matplotlib.rcParams.update({'font.family': 'serif', 'font.size': 20,
     'axes.labelsize': 20,'axes.titlesize': 24, 'figure.titlesize' : 32})
 matplotlib.rcParams['text.usetex'] = True
@@ -16,36 +14,19 @@ from scipy import stats
 import itertools
 import matplotlib.gridspec as gridspec
 from matplotlib.ticker import MaxNLocator
-#Creating histograms and fiolin plots for the data(yay!)
 
 
-years= [str(year) for year in range(2015,2024)]
+
+years= [str(year) for year in range(2015,2023)]
+
 # Reading all files from a given folder
-base_folder_path = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/'#+ year + '/'  # Replace with the actual folder path
+base_folder_path = r'your_folder'#+ year + '/'  # Replace with the actual folder path
 file_prefix = 'cumulative_'
 #file_suffix = year + '.csv'
 
 # List all files in the folder that match the file prefix and suffix
 file_list = [file for file in os.listdir(base_folder_path) if file.startswith(file_prefix)] #and file.endswith(file_suffix)
 print(f'File list: {file_list}')
-
-# Read each file and combine them into one dataframe
-#dfs = []
-#for file in file_list:
-#    file_path = os.path.join(base_folder_path, file)
-#    df = pd.read_csv(file_path)
-#    dfs.append(df)
-
-#combined_df = pd.concat(dfs)
-
-# Save the combined dataframe as a new csv file
-#output_file = os.path.join(base_folder_path, f'{year}.csv')
-#combined_df.to_csv(output_file, index=False)
-
-# Histogram for number of occurance of events by hour.
-
-#combined_df['Time'] = pd.to_datetime(combined_df['Time'])
-#combined_df['nadir_time'] = pd.to_datetime(combined_df['nadir_time'])
 
 def create_histograms(df,folder_path,ax):
     # Filter rows where event_start is True. Now I only have the rows where the event starts. Aka, all my events.
@@ -69,13 +50,9 @@ def create_histograms(df,folder_path,ax):
 
     # Create histogram for hour
     ax.hist(event_df['hour'], bins=range(0, 25), edgecolor='black')
-    #plt.title(f'Events by hour in {year} (Number of events: {total_events})')
     ax.set_xlabel(r'Hour')
     ax.set_xticks([0, 12, 24])
-    #ax.ylabel('Number of events')
-    #ax.xticks(range(0, 24))  # Set x-axis ticks to show all hour stamps
-    #plt.savefig(f'{os.path.dirname(folder_path)}/histogram_events_vs_hour{year}.pdf')
-#    plt.show()
+
 
 
 def create_histograms_2015_2023(df,folder_path,ax_big):
@@ -84,6 +61,7 @@ def create_histograms_2015_2023(df,folder_path,ax_big):
 
 
     #Filtering out time to nadir events over 25 seconds and under 2 seconds. Doing this for all my functions.
+    
     # Calculate time difference between event start and nadir in seconds.
     event_df['time_to_nadir'] = (event_df['nadir_time'] - event_df['Time']).dt.total_seconds()
 
@@ -144,17 +122,11 @@ def create_rocof_histogram(df):
     plt.legend( fontsize='9') #title='RoCoF range', title_fontsize='8',
     plt.tight_layout()
 
-
-
-# max RoCoF value vs Nadir
-
-# max RoCoF vs time to nadir
-
-
 xmax = 24
 xmin = 0
 ymax = 20
 ymin = 0
+
 # Set the x and y-axis limits
 x_limits = [xmin, xmax]  # replace xmin and xmax with the desired values
 y_limits = [ymin, ymax]  # replace ymin and ymax with the desired values
@@ -174,11 +146,10 @@ num_cols = 3
 for i,axis in enumerate(ax):
     axis.set_xlim(x_limits)
     axis.set_ylim(y_limits)
-    #axis.tick_params(axis='y',pad=3,length=5)  # This line changes the y-axis label size
-# Hide the x-axis for the top 6 subplots
 
     # Add the year above each subplot
     axis.set_title(f'{years[i]}', y=1,size= 19)
+    
 # Initialize an empty list to store all dataframes
 all_dfs = []
 for i, year in enumerate(years):
@@ -198,14 +169,6 @@ for i, year in enumerate(years):
         dfs.append(df)
     # Combine all dataframes in dfs into one dataframe
     combined_df = pd.concat(dfs)
-
-    # Create a new column to indicate if the RoCoF is positive or negative
-    #combined_df['rocof_sign'] = np.where(combined_df['rocof'] >= 0, 'positive', 'negative')
-
-    # Save the combined dataframe as a new csv file
-    #output_file = os.path.join(folder_path, f'cumulative_rocofevents_{year}.csv')
-    #combined_df.to_csv(output_file, index=False)
-
 
     # Convert the Time and nadir_time columns to datetime objects
     combined_df['Time'] = pd.to_datetime(combined_df['Time'])
