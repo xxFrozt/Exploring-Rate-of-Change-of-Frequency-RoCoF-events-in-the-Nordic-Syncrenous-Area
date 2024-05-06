@@ -1,13 +1,13 @@
 ## Exploring-Rate-of-Change-of-Frequency-RoCoF-events-in-the-Nordic-Syncrenous-Area
 
 Welcome to this GitHub repository! 
-This project is an integral part of my Master's Thesis at the Norwegian University of Life Sciences (NMBU) and focuses on analyzing and processing frequency data from FinGrid to identify Rate of Change of Frequency (RoCoF) events in the Nordic Synchronous Area.
+This project is an integral part of my Master's Thesis at the Norwegian University of Life Sciences (NMBU) and focuses on analyzing and processing frequency data from FinGrid to identify Rate of Change of Frequency (RoCoF) events in the Nordic Synchronous Area. The code have been used to analyse data in the time from 2015-2023. With an unzipped size of about 83 GB.
 
 ### The repository is organized into two main folders:
 
-Analysis: This folder contains scripts that analyze and process frequency data to detect RoCoF events. The code is well-commented to enhance readability and usability.
+Analysis: This folder contains scripts that analyze and process frequency data to detect RoCoF events. The code is somewhat commented on to enhance readability.
 
-Plotting: The scripts in this folder generate visualizations that help illustrate the findings from the analysis phase.
+Plotting: The scripts in this folder generate visualizations that help illustrate the findings.
 
 ### Tools and Techniques
 
