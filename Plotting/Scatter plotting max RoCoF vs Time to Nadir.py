@@ -21,8 +21,8 @@ from matplotlib.ticker import MaxNLocator
 years= [str(year) for year in range(2015,2024)]
 
 # Reading all files from a given folder
-base_folder_path = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/'#+ year + '/'  # Replace with the actual folder path
-file_prefix = 'rocofevents_'
+base_folder_path = r'your_folder'#+ year + '/'  # Replace with the actual folder path
+file_prefix = 'rocofevents_'                    
 #file_suffix = year + '.csv'
 
 def create_scatter_max_RoCoF_vs_time_to_nadir(df, folder_path,ax):
