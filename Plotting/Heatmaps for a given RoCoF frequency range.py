@@ -3,7 +3,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib
-matplotlib.rcParams['pgf.texsystem'] = 'pdflatex'
+matplotlib.rcParams['pgf.texsystem'] = 'pdflatex'                    #making figure prettier in latex.
 matplotlib.rcParams.update({'font.family': 'serif', 'font.size': 20,
     'axes.labelsize': 20,'axes.titlesize': 24, 'figure.titlesize' : 28})
 matplotlib.rcParams['text.usetex'] = True
@@ -19,7 +19,7 @@ from matplotlib.ticker import MaxNLocator
 years= [str(year) for year in range(2015,2024)]
 
 # Reading all files from a given folder
-base_folder_path = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/'#+ year + '/'  # Replace with the actual folder path
+base_folder_path = r'your_folder'#+ year + '/'  # Replace with the actual folder path
 file_prefix = 'rocofevents_'
 
 
@@ -48,9 +48,6 @@ def create_heatmap(df,min_rocof,max_rocof,folder_path,min_rocof_string,subplot,y
 
     df['Month'] = df['Time'].dt.month
 
-    #df['Year'] = df['Time'].dt.year
-    #df['Month'] = df['Time'].dt.month
-    #print(df)
     # Group by year and month and count the number of events
     event_counts = df.groupby(['Year', 'Month']).size().reset_index(name='Count')
 
@@ -63,9 +60,6 @@ def create_heatmap(df,min_rocof,max_rocof,folder_path,min_rocof_string,subplot,y
 
     # Replace the numeric month indices with their corresponding names
     blank_heatmap_data.index = blank_heatmap_data.index.map({1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'})    
-
-    # Save the heatmap data to a CSV file
-    #df.to_csv(f'{os.path.dirname(folder_path)}/heatmap of events_{min_rocof_string}_to_{max_rocof}.csv', index=False)
     
     # Plot the heatmap
     sns.heatmap(blank_heatmap_data, fmt="d", cmap='YlGnBu',annot_kws={"size": 10},cbar_kws={'label': 'Number of Events' if cbar_label else ''}, ax=subplot,)
@@ -135,6 +129,5 @@ for i, (interval, subplot) in enumerate(zip(intervals, axs.flatten())):
 fig.subplots_adjust(wspace=.25)    
 # Reduce whitespace around the figure
 plt.tight_layout()
-#create_heatmap(all_years_df,min_rocof_list,max_rocof_list,folder_path)#min_rocof_string
 plt.savefig(f'{os.path.dirname(base_folder_path)}/heatmaps for different Max RoCoF values.pdf') 
 plt.show()
