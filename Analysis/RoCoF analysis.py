@@ -1,11 +1,5 @@
-#RoCoF searcher WHICH WORKED..
+#RoCoF analysis
 
-
-# From paper: Barrios-Gomez et al. - 2020 - RoCoF Calculation Using Low-Cost Hardware in the L.pdf
-# RoCoF t dt NT −+ = = (4) where 𝑑𝑑f/dt is the RoCoF at sample t, N is the number of samples in the moving average window, T 
-# is the duration of the moving average window and f(t) is the frequency at sample
-
-# packs
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,64 +13,13 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-# Parameters
-#year = '2016'
-#month = '08'
-#filename = 'smoothed_'+ year + '_' + month + '.zip'
-#location = r'C:/Users/Tore Tang/Data FinGrid smoothed/'+ year + '/' + month + '/'  # location of the zip file
-
-# Location to save file and plot
-#save_to = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/'+year+'/'#+month+'/'
-
-#%% Reading in the smoothed file
-
-#with ZipFile(location + filename, 'r') as zip_file:
-    # loop through each file in the zip archive, for later use with several files
-#    for file_info in tqdm(zip_file.infolist()):               #tqdm doesnt do much here as it is one zip file with one csv :P
-        # check if it's a file 
-#        if not file_info.is_dir():
-            # extract the file content
-#            with zip_file.open(file_info.filename) as file:
-                # reading in the csv file
-#                df = pd.read_csv(file)                       
-                #print('line54')
-#                df.drop(df.columns[df.columns.str.contains('Unnamed: 0',case = False)],axis = 1, inplace = True) #drop unnamed columns. #Weird that it appears. From the cleaning?
-                #print(df)
-
-
-#%% Reading in raw data. Added in own column.
-#raw_location = r'C:/Users/Tore Tang/Data FinGrid clean/'+ year + '/' + month + '/'
-#raw_filename = 'finland' + '_' + year + '_' + month + '.zip'
-
-#with ZipFile(raw_location + raw_filename, 'r') as zip_file:
-    # loop through each file in the zip archive, for later use with several files
-#    for raw_file_info in tqdm(zip_file.infolist()):               #tqdm doesnt do much here as it is one zip file with one csv :P
-        # check if it's a file 
-#        if not raw_file_info.is_dir():
-            # extract the file content
-#            with zip_file.open(raw_file_info.filename) as raw_file:
-                # reading in the csv file
-#                raw_df = pd.read_csv(raw_file)                       
-                #print('line54')
-#                raw_df.drop(df.columns[df.columns.str.contains('Unnamed: 0',case = False)],axis = 1, inplace = True) #drop unnamed columns. #Weird that it appears. From the cleaning?
-                #print(raw_df)
-
-#print('df loaded as:')
-#print(df)
-#print('raw_df loaded as:')
-#print(raw_df)
-
-# adding in the raw frequency to the smoothed dataframe. In its own column.
-#df = df.assign(Raw_Frequency=raw_df['Frequency'])
-
-#%%trying new finder, gives results.
 def calculate_rocof(N, T, rocof_limit,freq_change_limit,year,month): #df
 
     filename = 'smoothed_'+ year + '_' + month + '.zip'
-    location = r'C:/Users/Tore Tang/Data FinGrid smoothed/'+ year + '/' + month + '/'  # location of the zip file
+    location = r'your_folder'+ year + '/' + month + '/'  # location of the zip file
 
     # Location to save file and plot
-    save_to = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/'+year+'/'#+month+'/'
+    save_to = r'your_folder'+year+'/'#+month+'/'
     
     with ZipFile(location + filename, 'r') as zip_file:
     # loop through each file in the zip archive, for later use with several files
@@ -293,16 +236,15 @@ def plot_event(df_event,event_number):
 
 
 
+# Choose your desired year(s) and month(s)
 
-#Running loop for all years and months.
-years = ['2019','2020','2021','2022'] #'2016','2017','2018','2019','2020','2021'
-#years = ['2023']
+years = ['2015','2016','2017','2018','2019','2020','2021','2022','2023']
 for year in years:
-    months = ['01','02','03','04','05','06','07','08','09','10','11','12'] #,'03','04','05','06','07','08','09','10','11','12'
-    #months = ['10']
+    months = ['01','02','03','04','05','06','07','08','09','10','11','12']
+ 
     for month in months:
         df_rocof = calculate_rocof(N, T, rocof_limit,freq_change_limit,year,month).copy()           #copy to avoid SettingWithCopyWarning
-        save_df_to=r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/' + year + '/'#+month+'/'
+        save_df_to=r'your_folder' + year + '/'#+month+'/'
         df_rocof.to_csv(save_df_to + 'rocofevents_'+ month + '_' + year + '.csv',float_format='%.5f')
         
         #plotting stuff below:
@@ -336,84 +278,8 @@ for year in years:
 print('done')
 
 
-# saving:
-"""""""""""""""""""""""""""""""""""""""
-save_df_to=r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/' + year + '/'#+month+'/'
+save_df_to=r'your_folder' + year + '/'#+month+'/'
 #os.makedirs(os.path.dirname(save_df_to), exist_ok=True)                                      #create the folder if it does not exist.
 
 #saving the dataframe to a csv file:
-df_rocof.to_csv(save_df_to + 'rocofevents_'+ month + '_' + year + '.csv',float_format='%.5f') #, originally float_format='%.0f', this changes to 0 decimals. I want 5 so is put to 5.
-
-
-save_to = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/'+year+'/'#+month+'/'
-print(df_rocof)
-
-# Plot the frequency and RoCoF events
-import matplotlib.pyplot as plt
-
-def plot_event(df_event,event_number):
-    fig, ax1 = plt.subplots(figsize=(15, 8))  # Set the figure size here
-
-    color = 'tab:blue'
-    ax1.set_xlabel('Time')
-    ax1.set_ylabel('Frequency, [mHz]', color=color)
-    ax1.plot(df_event['Time'], df_event['Raw_Frequency'], color='yellowgreen', label='Raw Frequency') 
-    ax1.plot(df_event['Time'], df_event['Frequency'], color=color, label='Frequency')
-    ax1.tick_params(axis='y', labelcolor=color)
-    ax1.legend(loc='upper left')
-
-    ax2 = ax1.twinx()
-
-    color = 'tab:red'
-    ax2.set_ylabel('RoCoF [mHz/s]', color=color)
-    ax2.plot(df_event['Time'], df_event['rocof'], color=color, label='RoCoF')
-    ax2.tick_params(axis='y', labelcolor=color)
-    ax2.legend(loc='upper right')  
-
-    # Calculate the maximum RoCoF value and the date and time of the event
-    max_rocof = df_event['rocof'].abs().max()
-    max_rocof_time = df_event.loc[df_event['rocof'].idxmax(), 'Time']
-
-    # Format the numbers to include only two decimal points
-    max_rocof_str = "{:.2f}".format(max_rocof)
-    max_rocof_time_str = max_rocof_time.strftime("%Y-%m-%d %H:%M:%S")
-
-    # Add a title to the figure
-    plt.title(f'RoCoF event with value {max_rocof_str} [mHz/s] at {max_rocof_time_str}')
-
-    fig.tight_layout()
-    #plt.show()
-
-    fig.savefig(os.path.join(save_to,f'{year}_{month}_event_{event_number}.png'))
-    # Close the figure to free up memory.
-    plt.close(fig)                          
-
-#plotting stuff below:
-
-# Convert 'Time' to datetime format
-df_rocof.loc[:, 'Time'] = pd.to_datetime(df_rocof['Time'])
-
-# Calculate the time difference between consecutive events
-df_rocof.loc[:, 'Time_diff'] = df_rocof['Time'].diff()
-
-# Define a threshold for the time difference (e.g., 1 minute)
-threshold = pd.Timedelta(minutes=1.5)
-
-# Find the indices where the time difference is larger than the threshold
-indices = df_rocof[df_rocof['Time_diff'] > threshold].index
-
-# Plot each event separately
-start = df_rocof.index[0]
-for i, end in enumerate(indices,start=1):
-    df_event = df_rocof.loc[start:end-1]
-    plot_event(df_event,i)
-    start = end
-
-# Plot the last event
-df_event = df_rocof.loc[start:]
-plot_event(df_event,len(indices)+1)
-
-
-# Output to show code is done running
-print('done')
-"""""""""""""""""""""""""""""""""""""""
+df_rocof.to_csv(save_df_to + 'rocofevents_'+ month + '_' + year + '.csv',float_format='%.5f')
