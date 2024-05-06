@@ -1,7 +1,5 @@
 ### Plotting individual events
 
-
-
 import pandas as pd
 import seaborn as sns
 import matplotlib
@@ -21,16 +19,15 @@ from matplotlib.ticker import AutoMinorLocator
 from matplotlib.dates import date2num
 import datetime
 
-#Creating histograms and fiolin plots for the data(yay!)
-
+#Creating histograms and fiolin plots for the data
 
 years= [str(year) for year in range(2015,2024)]
 # Reading all files from a given folder
-base_folder_path = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/csvfiles/'#+ year + '/'  # Replace with the actual folder path
+base_folder_path = r'your_folder'#+ year + '/'  # Replace with the actual folder path
 file_prefix = 'cumulative_'
 #file_suffix = year + '.csv'
 
-# List all files in the folder that match the file prefix and suffix
+# List all files in the folder that match the file prefix and suffix. Easy to check if some are missing :)
 file_list = [file for file in os.listdir(base_folder_path) if file.startswith(file_prefix)] #and file.endswith(file_suffix)
 print(f'File list: {file_list}')
 
@@ -104,7 +101,7 @@ def plot_event(df_event,ax1,is_leftmost,is_rightmost,is_bottom,event_time):
 # Create a figure and a grid of subplots
 fig, axs = plt.subplots(3, 3, figsize=(15, 8)) 
 
-
+# Choosing which events are to be plotted
 events_to_plot = {
     '2015': '2015-01-16 09:51:17',
     '2016': '2016-07-12 14:42:29',
@@ -115,11 +112,8 @@ events_to_plot = {
     '2021': '2021-07-26 19:02:36',
     '2022': '2022-08-21 21:13:01',
     '2023': '2023-06-25 21:08:33'
-}  #'2015': '16-01-2015 09:51:17'
-    #axis.tick_params(axis='y',pad=3,length=5)  # This line changes the y-axis label size
-# Hide the x-axis for the top 6 subplots
+}  
 
-    # Add the year above each subplot
 # Initialize an empty list to store all dataframes
 all_dfs = []
 lines_labels = [([], [])]
@@ -162,19 +156,10 @@ for i, (year,event_time) in enumerate(events_to_plot.items()):
         lines_labels[0][1].extend(labels)  # Add labels to the global list
     else:
         print(f"No events found in the range {start_time} to {end_time} for year {year}")
-    #plot_event(df_event)
 
-    # Save the combined dataframe as a new csv file
-    #output_file = os.path.join(folder_path, f'cumulative_rocofevents_{year}.csv')
-    #combined_df.to_csv(output_file, index=False)
 
     # Append the combined_df of each year to all_dfs
     all_dfs.append(combined_df)
-
-    # Call your function to create the subplot for the current year.
-# Concatenate all dataframes in all_dfs to create a dataframe that includes data from all years
-#all_years_df = pd.concat(all_dfs)
-#ax_big.legend(handlelength=1.1, handletextpad=.5, loc=2, fontsize=18)
 
 # Reduce whitespace around the figure
 plt.tight_layout()
