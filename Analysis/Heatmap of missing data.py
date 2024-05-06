@@ -1,3 +1,5 @@
+# This code makes a heatmap which shows in which month are missing more data. 
+# The code is using a .csv file which have been manually inputted with the missing data in percent for each month of each year.
 import seaborn as sns
 import pandas as pd
 import matplotlib
@@ -10,16 +12,10 @@ from matplotlib.colors import LogNorm
 import matplotlib.pyplot as plt
 import os
 
-#file = r'C:/Users/Tore Tang/Data FinGrid clean/missing data/'
-#file_name = "missing_data_overview.csv"  # Include the file extension
+file = r'your_folder'
+file_name = "missing_data_overview.csv"  # Include the file extension
 
-# Read the CSV file
-#df = pd.read_csv(file + file_name, index_col=0)
-
-df = pd.read_csv(r'C:\Users\Tore Tang\Data FinGrid clean\missing_data_overview.csv', index_col=0)
-
-# Drop the 'Total' column
-#df = df.drop(columns=['Total'])
+df = pd.read_csv(r'your_folder.csv', index_col=0)
 
 # Transpose the DataFrame
 df = df.T
