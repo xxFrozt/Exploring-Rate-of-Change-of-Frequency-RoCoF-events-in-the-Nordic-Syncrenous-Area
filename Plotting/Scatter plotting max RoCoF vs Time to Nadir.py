@@ -1,4 +1,8 @@
-#Creating histograms and fiolin plots for the data(yay!)
+#This code creates a scatterplot of max RoCoF vs Time to Nadir.
+# It is designed to make a big plot of all year 2015-2023 and then 9 smaller plots for each year.
+# The code is designed to be used with the csv files created by the code in RoCoF events.py
+# Please change the file path to the folder where the csv files are stored if you are to use this on your own data :))
+# There are also adjustments to the font size and the size of the plot to make it look better in a pdf file.
 
 import pandas as pd
 import seaborn as sns
