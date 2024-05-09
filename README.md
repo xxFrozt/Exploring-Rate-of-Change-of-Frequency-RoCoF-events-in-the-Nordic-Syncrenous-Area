@@ -11,7 +11,7 @@ Plotting: The scripts in this folder generate visualizations that help illustrat
 
 ### Tools and Techniques
 
-The analysis employs the Whittaker-Henderson smoother. Which was first introduced by Edmund Taylor Whittaker in 1922. The smoothing method used in this work is adapted to Python from Java code initially introduced by Michael Schmid, David Rath, and Ulrike Diebold in the paper "Why and How Savitzky–Golay Filters Should Be Replaced." For further reading and technical details, see their paper at, https://doi.org/10.1021/acsmeasuresciau.1c00054.
+The analysis employs the Whittaker-Henderson smoother. Which was first introduced by Edmund Taylor Whittaker in 1922. The smoothing method used in this work is adapted to Python from Java code initially introduced by Michael Schmid, David Rath, and Ulrike Diebold in the paper "Why and How Savitzky–Golay Filters Should Be Replaced." For further reading and technical details, see their paper at, https://doi.org/10.1021/acsmeasuresciau.1c00054. Their Java code can be found under "Supporting Information".
 
 ### Objective
 
