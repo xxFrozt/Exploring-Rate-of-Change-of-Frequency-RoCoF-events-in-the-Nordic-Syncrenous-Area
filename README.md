@@ -17,4 +17,4 @@ The analysis employs the Whittaker-Henderson smoother. Which was first introduce
 
 The primary goal of this project is to provide a detailed examination of RoCoF events, aiding exploring the frequency stability within the Nordic Synchronous Area.
 
-The code is by no means free from faults. The code is published under the MIT Licence, so feel free to explore the code and use it in your own research or application.
+The code is by no means faultless. It is published under the MIT License, so feel free to explore it and use it in your own research or application.
