@@ -11,10 +11,10 @@ Plotting: The scripts in this folder generate visualizations that help illustrat
 
 ### Tools and Techniques
 
-The analysis employs the Whittaker-Henderson smoother. Which was first introduced by Edmund Taylor Whittaker in 1922. The smoothing method used in this work is adapted to Python from Java code initially introduced by Michael Schmid, David Rath, and Ulrike Diebold in the paper "Why and How Savitzky–Golay Filters Should Be Replaced." For further reading and technical details, see their paper at, https://doi.org/10.1021/acsmeasuresciau.1c00054. Their Java code can be found under "Supporting Information".
+The analysis employs the Whittaker-Henderson smoother. The math behind it was first introduced by Edmund Taylor Whittaker in 1922. The modern implementation of this method is written in Java by Michael Schmid, David Rath, and Ulrike Diebold in the paper "Why and How Savitzky–Golay Filters Should Be Replaced". The smoothing method used in my work is adapted to Python from the Java. To explore the original code see their paper at, https://doi.org/10.1021/acsmeasuresciau.1c00054. Their Java code can be found under "Supporting Information".
 
 ### Objective
 
 The primary goal of this project is to provide a detailed examination of RoCoF events.
 
-The code is by no means faultless. It is published under the MIT License, so feel free to explore it and use it in your own research or application.
+The code in this repository is by no means faultless. It is published under the MIT License, so feel free to explore it and use it in your own research or application.
