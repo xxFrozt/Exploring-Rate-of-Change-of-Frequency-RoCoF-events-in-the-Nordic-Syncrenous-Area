@@ -32,7 +32,7 @@ cbar.set_label('Percentage of Missing Data')
 plt.title('Missing Data in FinGrid Dataset')
 
 # Save the plot to the same directory as the data file
-file_path = r'C:\Users\Tore Tang\Data FinGrid clean\missing_data_overview.csv'
+file_path = r'your_folder'
 directory = os.path.dirname(file_path)
 file_name = os.path.basename(file_path)
 file_name_without_extension = os.path.splitext(file_name)[0]
