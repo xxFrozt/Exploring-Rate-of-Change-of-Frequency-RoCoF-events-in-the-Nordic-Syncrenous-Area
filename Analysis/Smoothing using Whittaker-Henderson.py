@@ -48,14 +48,15 @@ with ZipFile(location + saveplace, 'r') as zip:
                 df.drop(df.columns[df.columns.str.contains('Unnamed: 0',case = False)],axis = 1, inplace = True) #drop unnamed columns. #Weird that it appears. From the cleaning?
             #print(df)
             # Concatenate the data to the empty DataFrame
-            #df = pd.concat([df, data], ignore_index=True)      #close this? -erlend
+            #df = pd.concat([df, data], ignore_index=True)
             
 
 
-df.rename({'Time':'datetime'}, axis='columns',inplace=True) #,inplace=True #change the name of the first column to 'datetime'. Had issues with "Unnamed 0" and Time appearing. As 2 columns.
+df.rename({'Time':'datetime'}, axis='columns',inplace=True) #,inplace=True #change the name of the first column to 'datetime'. Had issues with "Unnamed 0" and Time appearing.
 
 # Choose the order of the penalty derivative (order) and the smoothing parameter (lambda_val).
 
+# Employing multiprocessing to handle chunks of the data. If one would like there are WH smoothers written in MatLab which could be less time consuming. Check "A Perfect Smoother" at doi:10.1021/ac034173t
 def smooth_data(chunk, order, lambda_val):
     smoother = WhittakerHendersonSmoother(len(chunk), order, lambda_val)
     return smoother.smooth(chunk)
@@ -102,7 +103,7 @@ if __name__ == '__main__':
     print(end - start)
     
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# The code below is commented out. But have been used to visualize the smoothing process. This enables tuning of the parameters.
+# The code below is commented out. But have been used to visualize the smoothing process. This enables tuning of the parameters by visual inspection
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #    fig = go.Figure()
