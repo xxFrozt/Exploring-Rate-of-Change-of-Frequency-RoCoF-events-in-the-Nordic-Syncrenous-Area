@@ -35,7 +35,7 @@ def calculate_rocof(N, T, rocof_limit,freq_change_limit,year,month): #df
                     #print(df)
 
 
-    raw_location = r'C:/Users/Tore Tang/Data FinGrid clean/'+ year + '/' + month + '/'
+    raw_location = r'your_folder'+ year + '/' + month + '/'
     raw_filename = 'finland' + '_' + year + '_' + month + '.zip'
 
     with ZipFile(raw_location + raw_filename, 'r') as zip_file:
@@ -198,7 +198,7 @@ freq_change_limit = 35     # minimum change in frequency to be considered an eve
 
 def plot_event(df_event,event_number):
     fig, ax1 = plt.subplots(figsize=(15, 8))  # Set the figure size here
-    save_to = r'C:/Users/Tore Tang/Data Fingrid RoCoF events/'+year+'/'
+    save_to = r'your_folder'+year+'/'
     color = 'tab:blue'
     ax1.set_xlabel('Time')
     ax1.set_ylabel('Frequency, [mHz]', color=color)
