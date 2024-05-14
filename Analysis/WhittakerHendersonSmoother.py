@@ -1,5 +1,5 @@
 # WhittakerHendersonSmoother. Adapted from Java code found in the supporting information in 'Why and How Savitzky–Golay Filters Should Be Replaced', https://doi.org/10.1021/acsmeasuresciau.1c00054
-
+# Note: Not all methods in this class are utilized in the use of the smoother.
 
 import numpy as np
 
