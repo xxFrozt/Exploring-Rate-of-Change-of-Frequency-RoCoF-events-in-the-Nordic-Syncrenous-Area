@@ -1,5 +1,5 @@
-# WhittakerHendersonSmoother. Adapted from Java code found in the supporting information in 'Why and How Savitzky–Golay Filters Should Be Replaced', https://doi.org/10.1021/acsmeasuresciau.1c00054
-# Note: Not all methods in this class are utilized in the use of the smoother.
+# WhittakerHendersonSmoother. 
+# Adapted from Java code found in the supporting information in paper, M. Schmid, D. Rath and U. Diebold, 'Why and How Savitzky–Golay Filters Should Be Replaced', ACS Measurement Science Au, 2022,  https://doi.org/10.1021/acsmeasuresciau.1c00054
 
 import numpy as np
 
@@ -12,7 +12,9 @@ class WhittakerHendersonSmoother:
         [1, -4, 6, -4, 1],
         [-1, 5, -10, 10, -5, 1]  # 5th derivative. 5 = MAX_ORDER
     ]
-    LAMBDA_FOR_NOISE_GAIN = [0.06284, 0.0050100, 0.0004660, 4.520e-05, 4.467e-06] #trying bigger values
+
+# Coefficients for converting noise gain to lambda */
+    LAMBDA_FOR_NOISE_GAIN = [0.06284, 0.0050100, 0.0004660, 4.520e-05, 4.467e-06]
 
     def __init__(self, length, order, lambda_val):           # provide length of Numpy array, and the parameters order(penalty) and lambda(smoothing strength)
         self.matrix = self.make_dprime_d(order, length)
@@ -61,6 +63,8 @@ class WhittakerHendersonSmoother:
         lambda_val = WhittakerHendersonSmoother.LAMBDA_FOR_NOISE_GAIN[order] / (g_power + g_power) # lambda is calculated from g power
         return lambda_val
 
+# Creates a symmetric band-diagonal matrix D'*D where D is the n-th derivative matrix and D' its transpose.
+    
     @staticmethod
     def make_dprime_d(order, size):
         if order < 1 or order > WhittakerHendersonSmoother.MAX_ORDER:
@@ -78,6 +82,8 @@ class WhittakerHendersonSmoother:
                 out[d][len(out[d]) - 1 - i] = s
         return out
 
+# Modifies a symmetric band-diagonal matrix b.
+    
     @staticmethod
     def times_lambda_plus_ident(b, lambda_val):
         for i in range(len(b[0])):                                                            # loop through the length of the list
@@ -86,7 +92,7 @@ class WhittakerHendersonSmoother:
             for i in range(len(b[d])):                                                        # loop through the length of the list
                 b[d][i] = b[d][i] * lambda_val                                                # off-diagonal elements
 
-
+# Cholesky decomposition of a symmetric band-diagonal matrix b. The input is replaced by the lower left trianglar matrix.
     @staticmethod
     def cholesky_l(b):
         n = len(b[0])                                                                        # get the length of the list
@@ -102,6 +108,7 @@ class WhittakerHendersonSmoother:
                 else:
                     b[i - j][j] = 1.0 / b[0][j] * (b[i - j][j] - s)                          # calculate the off-diagonal elements
 
+#Solves the equation b*y = vec for y (forward substitution) and thereafter b'*x = y, where b' is the transposed (back substitution)
     @staticmethod
     def solve(b, vec, out=None):
         if out is None or len(out) != len(vec):
